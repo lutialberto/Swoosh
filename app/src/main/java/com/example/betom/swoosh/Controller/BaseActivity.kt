@@ -1,4 +1,4 @@
-package com.example.betom.swoosh
+package com.example.betom.swoosh.Controller
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
