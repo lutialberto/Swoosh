@@ -4,28 +4,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.example.betom.swoosh.Utilities.EXTRA_LEAGUE
+import com.example.betom.swoosh.Model.Player
 import com.example.betom.swoosh.R
-import com.example.betom.swoosh.Utilities.EXTRA_SKILL
+import com.example.betom.swoosh.Utilities.EXTRA_PLAYER
 import kotlinx.android.synthetic.main.activity_skill.*
 
 class SkillActivity : BaseActivity() {
 
-    var league = ""
-    var skill = ""
+    val NO_SKILL_CHOISE = ""
+    lateinit var player: Player
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_skill)
-        league = intent.getStringExtra(EXTRA_LEAGUE)
-        println(league)
+        player = intent.getParcelableExtra(EXTRA_PLAYER)
     }
 
     fun onSkillFinishClicked(view: View){
-        if(skill != "") {
+        if(player.skill != NO_SKILL_CHOISE) {
             val finishActivity = Intent(this, FinalActivity::class.java)
-            finishActivity.putExtra(EXTRA_LEAGUE,league)
-            finishActivity.putExtra(EXTRA_SKILL,skill)
+            finishActivity.putExtra(EXTRA_PLAYER,player)
             startActivity(finishActivity)
         } else {
             Toast.makeText(this,"Plaese select a skill level.",Toast.LENGTH_SHORT).show()
@@ -35,17 +33,17 @@ class SkillActivity : BaseActivity() {
     fun onSkillBallerClick(view: View){
         if(skillBallerButton.isChecked) {
             skillBeginnerButton.isChecked = false
-            skill = "baller"
+            player.skill = "baller"
         } else
-            skill = ""
+            player.skill = NO_SKILL_CHOISE
     }
 
     fun onSkillBegginerClick(view: View){
         if(skillBeginnerButton.isChecked) {
             skillBallerButton.isChecked = false
-            skill = "beginner"
+            player.skill = "beginner"
         } else
-            skill = ""
+            player.skill = NO_SKILL_CHOISE
     }
 
 }
